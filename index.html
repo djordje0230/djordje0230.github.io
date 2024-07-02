@@ -105,6 +105,36 @@
     <button onclick="document.getElementById('audioPlayer').play()">Play</button>
 </body>
 
+<body>
+
+<audio id="audioContainer">
+  <source src="name.m4a" type="audio/m4a">
+</audio>
+
+<p>Click the buttons to play or pause the audio.</p>
+
+<button id="play" onclick="playMp3()" type="button">Play Mp3</button>
+<button id="pause" onclick="pauseMp3()" type="button">Pause Mp3</button> 
+
+<script>
+const audioContainer = document.getElementById("audioContainer"); 
+
+function playMp3() { 
+  audioContainer.play(); 
+} 
+
+function pauseMp3() { 
+  audioContainer.pause(); 
+} 
+</script>
+
+</body>
+        
+var play = document.getElementById("play");
+var pause = document.getElementById("play");
+play.innerHTML = '<img src="images/play.png" />';
+pause.innerHTML = '<img src="images/pause.png" />';
+        
   
   <div align="left"><h3>Publications</h3>
   <ul>
