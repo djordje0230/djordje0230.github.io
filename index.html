@@ -31,28 +31,31 @@
     <link rel="icon" type="image/x-icon" href="profile_pic_djordje.jpg" />  
     
     <style>
-      /* Add custom styling to center the image */
+      /* Fixed header image at the top */
       .header-image {
+        position: fixed; /* Fix the header image at the top */
+        top: 0;
+        left: 0;
         width: 100%;
         height: auto;
         display: block;
-        margin: 0 auto;
+        z-index: -1; /* Keep it behind other content */
       }
 
-      /* Remove fixed header positioning */
+      /* Ensure profile and text details scroll normally */
       header {
-        position: relative; /* Reverts header to normal flow in the document */
-        background-color: white; /* Optional: adds a background color */
-        padding: 20px 0; /* Adjust padding to ensure the header looks good */
+        position: relative; /* Normal flow, not fixed */
+        background-color: white;
+        padding: 80px 0 20px; /* Adjust padding to keep space for the header image */
       }
 
       .wrapper {
-        /* No padding necessary here for the header */
+        padding-top: 150px; /* Give enough space for the fixed header image */
       }
     </style>
     
     <div class="wrapper">
-      <!-- Add the image at the top and center it -->
+      <!-- The header image will be fixed at the top of the screen -->
       <img src="testing.jpg" alt="Header Image" class="header-image">
 
       <header>
