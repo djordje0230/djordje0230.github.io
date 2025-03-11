@@ -38,6 +38,21 @@
         display: block;
         margin: 0 auto;
       }
+
+      /* Fix the header so it stays at the top */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: white; /* Optional, adds a background color to avoid transparency */
+        z-index: 1000; /* Ensure the header stays on top of other elements */
+        padding: 20px 0; /* Adjust padding to ensure the header looks good */
+      }
+
+      .wrapper {
+        padding-top: 150px; /* Add some top padding to prevent the header from covering the content */
+      }
     </style>
     
     <div class="wrapper">
