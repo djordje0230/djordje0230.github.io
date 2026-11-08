@@ -4,141 +4,474 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Đorđe Milosav</title>
-  <meta name="description" content="Đorđe Milosav, postdoctoral researcher in political science at the University of Bergen, working on political behavior, comparative politics and experimental methods.">
-
+  <meta name="description" content="Đorđe Milosav, postdoctoral researcher in political science at the University of Bergen, working on political behavior, gender, the far right and protest with experimental methods.">
   <link rel="icon" type="image/jpeg" href="profile_pic_djordje.jpg">
-  <link rel="stylesheet" href="stylesheets/styles.css">
-  <link rel="stylesheet" href="stylesheets/kube.css">
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&display=swap" rel="stylesheet">
+
 
   <style>
-    section li { margin-bottom: 8px; }
-    .note { font-size: 0.85em; color: #777; }
-    .contact a { font-size: 10pt; }
+    :root {
+      --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+      --serif: "Newsreader", Georgia, "Times New Roman", serif;
+      --max: 1180px;
+      --gutter: clamp(16px, 4vw, 48px);
+    }
+    /* Light: ultramarine on lavender paper */
+    :root {
+      --bg: #F3F1FA;
+      --ink: #14123A;
+      --accent: #2B3BE0;
+      --hot: #FF4FA3;
+      --muted: #55547A;
+      --line: rgba(20, 18, 58, .16);
+      --soft: #E6E3F5;
+    }
+    /* Dark (follows the visitor's system setting): hot pink on midnight ink */
+    @media (prefers-color-scheme: dark) { :root {
+      --bg: #14123A;
+      --ink: #F3F1FA;
+      --accent: #FF4FA3;
+      --hot: #8C97FF;
+      --muted: #ABA9CC;
+      --line: rgba(243, 241, 250, .18);
+      --soft: #1E1B4E;
+    } }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      line-height: 1.65;
+      transition: background-color .5s ease, color .5s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* film grain */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 50;
+      opacity: .07;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; border-radius: 2px; }
+    ::selection { background: var(--hot); color: #14123A; }
+
+    /* ---------- top bar ---------- */
+    .top {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px var(--gutter);
+      font-family: var(--display); font-size: .95rem;
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      transition: background-color .5s ease;
+    }
+    .mark { font-weight: 800; letter-spacing: -.03em; font-size: 1.15rem; text-decoration: none; }
+    .top nav { display: flex; align-items: center; gap: 1.5em; }
+    .top nav a { text-decoration: none; }
+    .top nav a:hover { color: var(--accent); }
+
+    /* ---------- hero ---------- */
+    .hero {
+      max-width: var(--max); margin: 0 auto;
+      padding: clamp(48px, 9vw, 120px) var(--gutter) clamp(56px, 8vw, 104px);
+      position: relative;
+    }
+    .name {
+      position: relative; z-index: 2;
+      margin: 0;
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(4.2rem, 16.5vw, 14rem);
+      line-height: .84; letter-spacing: -.05em;
+      font-variation-settings: "opsz" 96;
+    }
+    .name .line { display: block; overflow: hidden; padding-bottom: .07em; }
+    .name .line + .line { padding-left: clamp(0px, 17vw, 250px); }
+    .name .line > span { display: inline-block; transform: translateY(108%); animation: rise 1.1s cubic-bezier(.2, .8, .15, 1) forwards; }
+    .name .line + .line > span { animation-delay: .14s; }
+    @keyframes rise { to { transform: none; } }
+
+    .portrait {
+      position: absolute; z-index: 1;
+      top: clamp(48px, 9vw, 120px); right: var(--gutter);
+      width: clamp(150px, 24vw, 300px); aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--accent);
+      display: grid; place-items: center;
+      opacity: 0; animation: pop .9s .5s cubic-bezier(.2, .8, .15, 1) forwards;
+    }
+    .portrait::after {
+      content: ""; position: absolute; inset: -14px;
+      border: 2px solid var(--hot); border-radius: 50%;
+      transform: translate(10px, 8px);
+    }
+    .portrait img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; border-radius: 50%;
+      filter: grayscale(1) contrast(1.15);
+      mix-blend-mode: multiply;
+    }
+    .portrait .mono { font-family: var(--display); font-weight: 800; font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -.05em; color: var(--bg); }
+    @keyframes pop { from { opacity: 0; transform: scale(.85) rotate(-8deg); } to { opacity: 1; transform: none; } }
+
+    .hero-meta {
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px;
+      margin-top: clamp(36px, 5vw, 64px); align-items: end;
+    }
+    .role { font-family: var(--display); font-weight: 500; font-size: clamp(1.3rem, 2.3vw, 1.85rem); line-height: 1.22; letter-spacing: -.015em; margin: 0; max-width: 26ch; }
+    .role a { text-decoration-color: var(--hot); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    .links { list-style: none; margin: 0; padding: 0; font-family: var(--display); font-size: 1.05rem; }
+    .links li { border-top: 1px solid var(--line); }
+    .links li:last-child { border-bottom: 1px solid var(--line); }
+    .links a { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; text-decoration: none; }
+    .links a span:last-child { color: var(--muted); }
+    .links a:hover span:first-child { color: var(--accent); }
+
+    .hear {
+      margin-top: 28px;
+      display: inline-flex; align-items: center; gap: 12px;
+      font: 500 1rem var(--display); color: inherit;
+      background: none; border: 0; padding: 0; cursor: pointer;
+    }
+    .hear .btn { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: var(--bg); display: grid; place-items: center; transition: transform .2s ease; }
+    .hear:hover .btn { transform: scale(1.08); }
+    .hear svg { width: 16px; height: 16px; fill: currentColor; }
+
+    /* ---------- sections ---------- */
+    .sec {
+      max-width: var(--max); margin: 0 auto;
+      padding: clamp(56px, 7vw, 96px) var(--gutter);
+      display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: clamp(24px, 4vw, 64px);
+      border-top: 1px solid var(--line);
+    }
+    .sec h2 {
+      margin: 0; position: sticky; top: 84px; align-self: start;
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: .95; letter-spacing: -.035em;
+    }
+    .sec h3 { font-family: var(--display); font-weight: 600; font-size: 1.2rem; letter-spacing: -.01em; margin: 0 0 10px; color: var(--accent); }
+    .lede {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(1.55rem, 2.9vw, 2.35rem); line-height: 1.28; letter-spacing: -.01em;
+      margin: 0 0 32px; max-width: 30ch;
+    }
+    .lede em { font-style: italic; color: var(--accent); }
+    .bio { max-width: 62ch; margin: 0 0 28px; }
+    .topics { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; max-width: 640px; font-family: var(--display); font-weight: 500; font-size: 1.1rem; }
+    .topics li { padding: 12px 0; border-bottom: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; }
+    .topics li::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--hot); transform: translateY(-1px); }
+    .cv {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 32px;
+      font: 600 1.05rem var(--display); text-decoration: none;
+      background: var(--accent); color: var(--bg);
+      padding: 13px 22px; border-radius: 999px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .cv:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--hot); }
+
+    /* publications */
+    .pubs { list-style: none; margin: 0; padding: 0; }
+    .pub { display: grid; grid-template-columns: 6.5rem 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .pub:first-child { padding-top: 0; }
+    .yr { font-family: var(--display); font-weight: 700; font-size: 1.15rem; color: var(--accent); line-height: 1.5; }
+    .t {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(1.2rem, 1.9vw, 1.5rem); line-height: 1.2; letter-spacing: -.015em;
+      text-decoration: none;
+      background-image: linear-gradient(var(--hot), var(--hot));
+      background-repeat: no-repeat; background-position: 0 100%; background-size: 0 3px;
+      transition: background-size .35s ease;
+    }
+    a.t:hover { background-size: 100% 3px; }
+    .by { margin: 6px 0 0; color: var(--muted); font-size: 1.02rem; }
+    .by i { color: var(--ink); }
+    .press { margin: 8px 0 0; font-size: .95rem; color: var(--muted); }
+    .press b { font-weight: 600; color: var(--ink); }
+
+    .papers { display: grid; grid-template-columns: 1fr 1fr; gap: 32px clamp(24px, 4vw, 56px); }
+    .plist { list-style: none; margin: 0; padding: 0; }
+    .plist li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .plist .pt { font-family: var(--display); font-weight: 600; font-size: 1.08rem; line-height: 1.25; letter-spacing: -.01em; display: block; }
+    .plist .pa { display: block; margin-top: 4px; font-size: .97rem; color: var(--muted); }
+    .flag { display: inline-block; margin-top: 8px; font: 600 .82rem var(--display); background: var(--hot); color: #14123A; padding: 3px 10px; border-radius: 999px; }
+
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px clamp(24px, 4vw, 56px); }
+    .plain { list-style: none; margin: 0; padding: 0; }
+    .plain li { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 1.02rem; }
+    .plain .when { display: block; font: 600 .95rem var(--display); color: var(--muted); }
+    .plain i { color: var(--muted); }
+    .plain a { text-decoration-color: var(--hot); text-underline-offset: 3px; }
+
+    /* footer */
+    footer { background: var(--ink); color: var(--bg); transition: background-color .5s ease, color .5s ease; }
+    .foot { max-width: var(--max); margin: 0 auto; padding: clamp(64px, 9vw, 120px) var(--gutter) 40px; }
+    .foot p.say { font-family: var(--display); font-weight: 500; font-size: clamp(1.3rem, 2.4vw, 1.8rem); margin: 0 0 8px; letter-spacing: -.015em; }
+    .mail {
+      display: inline-block; font-family: var(--display); font-weight: 800;
+      font-size: clamp(2rem, 7.2vw, 6rem); line-height: 1; letter-spacing: -.045em;
+      text-decoration: none; word-break: break-word;
+      background-image: linear-gradient(var(--hot), var(--hot)); background-repeat: no-repeat;
+      background-position: 0 92%; background-size: 100% .09em;
+      transition: color .25s ease;
+    }
+    .mail:hover { color: var(--hot); }
+    .foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: clamp(48px, 7vw, 96px); padding-top: 20px; border-top: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); font-size: .92rem; opacity: .8; }
+    .foot-row a { text-underline-offset: 3px; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 820px) {
+      .top nav a { display: none; }
+      .portrait { position: relative; top: auto; right: auto; margin: 0 0 28px 6px; width: 132px; }
+      .portrait::after { inset: -9px; transform: translate(7px, 5px); }
+      .name .line + .line { padding-left: 8vw; }
+      .hero-meta, .sec, .papers, .two { grid-template-columns: 1fr; }
+      .sec h2 { position: static; }
+      .pub { grid-template-columns: 1fr; gap: 4px; }
+      .topics { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .name .line > span { transform: none; }
+      .portrait { opacity: 1; }
+      html { scroll-behavior: auto; }
+    }
   </style>
 </head>
 
 <body>
-<div class="wrapper">
 
-  <header>
-    <h2>Đorđe Milosav</h2>
-    <img src="profile_pic_djordje.jpg" width="225" alt="Portrait of Đorđe Milosav">
-    <p>Postdoctoral Researcher<br>Department of Government<br>University of Bergen</p>
-
-    <div class="is-container-column is-center contact">
-      <a href="https://www4.uib.no/finn-ansatte/Dorde.Milosav">📍 University of Bergen</a>
-      <a href="mailto:dorde.milosav@uib.no" style="margin-bottom: 5px;">📬 dorde.milosav@uib.no</a>
-      <a href="https://scholar.google.com/citations?user=1mM_hGUAAAAJ&amp;hl=en">🎓 Google Scholar</a>
-      <a href="https://bsky.app/profile/djordjemilosav.bsky.social">🌤️ @djordjemilosav.bsky.social</a>
-    </div>
+  <header class="top">
+    <a class="mark" href="#top" aria-label="Back to top">ĐM</a>
+    <nav aria-label="Sections">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
-  <section>
+  <main id="top">
 
-    <h2>Welcome!</h2>
-    <p>
-      I am Đorđe Milosav, a postdoctoral researcher on the
-      <a href="https://www.gendersuccess.com/team-4-1">SUCCESS project</a> at the University of Bergen,
-      working with Ragnhild Muriaas. Previously, I was a postdoctoral research fellow in political behavior at
-      Humboldt University of Berlin, as part of the
-      <a href="https://sites.google.com/view/covideuproject/about-us/the-covideu-team">COVIDEU project</a>.
-      I received my PhD in Political Science from Trinity College Dublin.
-    </p>
-    <p>
-      My work is situated within political behavior and comparative politics, relies on experimental methods
-      and causal inference, and focuses geographically on Europe.    </p>
-    <p>You can find my CV <a href="https://www.dropbox.com/scl/fi/lz2fq0tvnrnwnfwyalz1a/CV_Milosav_Nov_2026.pdf?rlkey=lntiltccns8a811oto54z3k0p&st=oqdi3xam&dl=0">here</a>.</p>
+    <section class="hero" aria-label="Introduction">
+      <div class="portrait">
+        <span class="mono" aria-hidden="true">ĐM</span>
+        <img src="profile_pic_djordje.jpg" alt="Portrait of Đorđe Milosav" onerror="this.remove()">
+      </div>
 
-    <h3>Publications</h3>
-    <ul>
-      <li>
-        <strong>Đorđe Milosav</strong>. <em>The Curious Case of Autocratic Pinkwashing: Ana Brnabić and LGBTQ+ Rights in Serbia.</em>
-        <em>European Journal of Politics and Gender</em> (forthcoming).
-      </li>
-      <li>
-        <strong>Đorđe Milosav</strong> and Michelle D'Arcy, 2026.
-        <a href="https://doi.org/10.1080/13510347.2026.2686343" target="_blank" rel="noopener"><em>Capturing Legitimacy in Captured States: An Interview-Based Exploration of the Validity of Existing Legitimacy Measures in Serbia's Hybrid Regime.</em></a>
-        <em>Democratization</em>.
-      </li>
-      <li>
-        <strong>Đorđe Milosav</strong>, Zachary Dickson, Sara B. Hobolt, Heike Klüver, Theresa Kuhn, and Toni Rodon, 2025.
-        <a href="https://doi.org/10.1080/13501763.2025.2481181" target="_blank" rel="noopener"><em>The Youth Gender Gap in Support for the Far Right.</em></a>
-        <em>Journal of European Public Policy</em>.<br>
-        <span class="note">Media coverage: El País, The Guardian, The Loop (ECPR), EESC Info Newsletter, Seznam Zprávy</span>
-      </li>
-      <li>
-        Gizem Arıkan and <strong>Đorđe Milosav</strong>, 2024.
-        <a href="https://doi.org/10.1017/S1049096523000483" target="_blank" rel="noopener"><em>Integrating Research Methods Training into Elective Courses in an Undergraduate Curriculum.</em></a>
-        <em>PS: Political Science &amp; Politics</em>, 57(1), pp. 113–118.
-      </li>
-      <li>
-        <strong>Đorđe Milosav</strong> and Marina Nistotskaya, 2024.
-        <a href="https://doi.org/10.1016/j.jbef.2024.100901" target="_blank" rel="noopener"><em>Unpacking the Relevance of Interpersonal Trust in the Blockchain Era: Theory and Experimental Evidence.</em></a>
-        <em>Journal of Behavioral and Experimental Finance</em>, 42, 100901.
-      </li>
-      <li>
-        Sami Miaari and <strong>Đorđe Milosav</strong>, 2023.
-        <a href="https://www.bloomsburycollections.com/monograph-detail?docid=b-9780755648337&amp;tocid=b-9780755648337-chapter12" target="_blank" rel="noopener"><em>The Effect of the Separation Wall on the West Bank Labour Market.</em></a>
-        In A. Sa'di and N. Masalha (eds.), <em>Decolonizing the Study of Palestine: Indigenous Perspectives and Settler Colonialism after Elia Zureik</em>. London: I.B. Tauris.
-      </li>
-    </ul>
+      <h1 class="name">
+        <span class="line"><span>Đorđe</span></span>
+        <span class="line"><span>Milosav</span></span>
+      </h1>
 
-    <h3>Under Review</h3>
-    <ul>
-      <li>
-        <strong>Đorđe Milosav</strong>, Francesca Feo, Ragnhild Muriaas and Toril Stavenes. <em>Office-Congruent, Not Gender-Congruent: Candidate Evaluation Across Senior Political Offices in Gender-Equal Societies.</em><br>
-        <span class="note">Revise and resubmit at <em>West European Politics</em></span>
-      </li>
-      <li><strong>Đorđe Milosav</strong>, Hanna Bäck and Emma Renström. <em>The Right Influencer for the Right Guy: Ideological Congruence and Gender Equality Persuasion.</em></li>
-      <li>Francesca Feo and <strong>Đorđe Milosav</strong>. <em>Gender Salience and Sexist Attitudes.</em></li>
-      <li>Stuart J. Turnbull-Dugarte, <strong>Đorđe Milosav</strong>, Emma Renström, Hanna Bäck and Michal Grahn. <em>Small Men: The Impact of Perceived Masculine Threat on Sexist Attitudes and Far-Right Support.</em></li>
-      <li><strong>Đorđe Milosav</strong>, Jovana Zafirović and Andrej Cvetić. <em>Autocratic Booms and Democratic Echoes: State Repression and Democratic Aspirations in Hybrid Regimes.</em></li>
-      <li><strong>Đorđe Milosav</strong>, Asli Unan and Heike Klüver. <em>Beating the Heat from the Street: Disruption, Policing and Public Response to Climate Protests.</em></li>
-    </ul>
+      <div class="hero-meta">
+        <div>
+          <p class="role">Postdoctoral researcher in political science on the <a href="https://www.gendersuccess.com/team-4-1">SUCCESS project</a>, University of Bergen.</p>
 
-    <h3>Work in Progress</h3>
-    <ul>
-      <li><strong>Đorđe Milosav</strong>, Francesca Feo, Ragnhild Muriaas and Alba Huidobro. <em>Impostors in the Office: Perceptions of Confidence Among Politicians in Norway.</em></li>
-      <li><strong>Đorđe Milosav</strong>, Elisabeth Ivarsflaten and Ragnhild Muriaas. <em>Buffer Zones and Support for Protest Rights: Evidence from Six European Countries.</em></li>
-      <li>Philipp Heyna, Gaetano Inglese and <strong>Đorđe Milosav</strong>. <em>Gendered Effects of Economic Insecurity on Support for the Far-Right.</em></li>
-    </ul>
+          <button class="hear" type="button" data-hear>
+            <span class="btn" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 2.5v11l9-5.5z"/></svg></span>
+            <span data-hear-label>How do I say that? Hear my name</span>
+          </button>
+          <audio data-audio src="name.mp3" preload="none"></audio>
+        </div>
 
-    <h3>Invited Talks</h3>
-    <ul>
-      <li>2026 · Institutions and Political Actors Seminar Series, Universitat Pompeu Fabra, Barcelona.<br>
-        <span class="note"><em>Buffer Zones and Support for Protest Rights: Evidence from Six European Countries</em></span></li>
-      <li>2026 · The Humboldt Governance Lab, Humboldt-Universität zu Berlin.<br>
-        <span class="note"><em>Impostors in the Office: Perceptions of Confidence Among Politicians in Norway</em></span></li>
-    </ul>
+        <ul class="links">
+          <li><a href="mailto:dorde.milosav@uib.no"><span>Email</span><span>dorde.milosav@uib.no</span></a></li>
+          <li><a href="https://scholar.google.com/citations?user=1mM_hGUAAAAJ&amp;hl=en"><span>Google Scholar</span><span>Citations</span></a></li>
+          <li><a href="https://bsky.app/profile/djordjemilosav.bsky.social"><span>Bluesky</span><span>@djordjemilosav</span></a></li>
+          <li><a href="https://www4.uib.no/finn-ansatte/Dorde.Milosav"><span>UiB profile</span><span>Department of Government</span></a></li>
+        </ul>
+      </div>
+    </section>
 
-    <h3>Teaching</h3>
-    <p><strong>Humboldt-Universität zu Berlin</strong> (Lecturer)</p>
-    <ul>
-      <li>Experiments in Political Science (master), Summer 2025 ·
-        <a href="https://www.dropbox.com/scl/fi/xn4qllrl0ozr61kdccndm/Syllabus_Experiments.pdf?rlkey=81q3c6t3n4mdgtyw7kckvi8qw&amp;st=mz7r5300&amp;dl=0" target="_blank" rel="noopener">Syllabus</a></li>
-    </ul>
-    <p><strong>Trinity College Dublin</strong> (Teaching Assistant)</p>
-    <ul>
-      <li>Political Participation (POU33122; undergraduate), Spring and Fall 2022</li>
-      <li>Public Opinion (POU33111; undergraduate), Fall 2021</li>
-      <li>Politics and Irish Society (POU11021; undergraduate), Fall and Spring, 2019–21 and 2022–23</li>
-    </ul>
+    <section class="sec" id="research">
+      <h2>Research</h2>
+      <div>
+        <p class="lede">I study how citizens judge <em>politicians, protesters and the far right</em>, mostly through survey experiments run across Europe.</p>
+        <p class="bio">
+          I am a postdoctoral researcher at the University of Bergen, working with Ragnhild Muriaas on the SUCCESS project.
+          Before that I was a postdoctoral research fellow at Humboldt University of Berlin on the
+          <a href="https://sites.google.com/view/covideuproject/about-us/the-covideu-team">COVIDEU project</a>,
+          and I received my PhD in Political Science from Trinity College Dublin. My work sits in political behavior
+          and comparative politics and relies on experimental methods and causal inference.
+        </p>
+        <ul class="topics">
+          <li>Gender and political representation</li>
+          <li>Support for the far right</li>
+          <li>Protest and protest rights</li>
+          <li>Legitimacy in hybrid regimes</li>
+        </ul>
+        <a class="cv" href="https://www.dropbox.com/scl/fi/yua2rkdc98dldxk0lqj98/CV_Milosav_June_2026.pdf?rlkey=ttuovqwea27s5oddrzwtjagjh&amp;st=0xbwokt3&amp;dl=0" target="_blank" rel="noopener">Download my CV (PDF)</a>
+      </div>
+    </section>
 
-    <p style="margin-top: 2em;">Not sure how to pronounce my name? Listen to an AI doing it here:</p>
-    <audio controls preload="none">
-      <source src="name.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+    <section class="sec" id="publications">
+      <h2>Publications</h2>
+      <ol class="pubs" reversed>
+        <li class="pub">
+          <span class="yr">Forthcoming</span>
+          <div>
+            <span class="t">The Curious Case of Autocratic Pinkwashing: Ana Brnabić and LGBTQ+ Rights in Serbia</span>
+            <p class="by">Single-authored. <i>European Journal of Politics and Gender</i></p>
+          </div>
+        </li>
+        <li class="pub">
+          <span class="yr">2026</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1080/13510347.2026.2686343" target="_blank" rel="noopener">Capturing Legitimacy in Captured States: An Interview-Based Exploration of the Validity of Existing Legitimacy Measures in Serbia's Hybrid Regime</a>
+            <p class="by">With Michelle D'Arcy. <i>Democratization</i></p>
+          </div>
+        </li>
+        <li class="pub">
+          <span class="yr">2025</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1080/13501763.2025.2481181" target="_blank" rel="noopener">The Youth Gender Gap in Support for the Far Right</a>
+            <p class="by">With Zachary Dickson, Sara B. Hobolt, Heike Klüver, Theresa Kuhn and Toni Rodon. <i>Journal of European Public Policy</i></p>
+            <p class="press"><b>In the press:</b> El País, The Guardian, The Loop (ECPR), the EESC Info Newsletter and Seznam Zprávy.</p>
+          </div>
+        </li>
+        <li class="pub">
+          <span class="yr">2024</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1017/S1049096523000483" target="_blank" rel="noopener">Integrating Research Methods Training into Elective Courses in an Undergraduate Curriculum</a>
+            <p class="by">With Gizem Arıkan. <i>PS: Political Science &amp; Politics</i> 57(1): 113–118</p>
+          </div>
+        </li>
+        <li class="pub">
+          <span class="yr">2024</span>
+          <div>
+            <a class="t" href="https://doi.org/10.1016/j.jbef.2024.100901" target="_blank" rel="noopener">Unpacking the Relevance of Interpersonal Trust in the Blockchain Era: Theory and Experimental Evidence</a>
+            <p class="by">With Marina Nistotskaya. <i>Journal of Behavioral and Experimental Finance</i> 42: 100901</p>
+          </div>
+        </li>
+        <li class="pub">
+          <span class="yr">2023</span>
+          <div>
+            <a class="t" href="https://www.bloomsburycollections.com/monograph-detail?docid=b-9780755648337&amp;tocid=b-9780755648337-chapter12" target="_blank" rel="noopener">The Effect of the Separation Wall on the West Bank Labour Market</a>
+            <p class="by">With Sami Miaari. In A. Sa'di and N. Masalha (eds.), <i>Decolonizing the Study of Palestine: Indigenous Perspectives and Settler Colonialism after Elia Zureik</i>. I.B. Tauris</p>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-    <p style="margin-top: 4cm;"><small>
-      This website uses the <a href="https://github.com/orderedlist/minimal">minimal theme</a> and is inspired by
-      Shiro Kuriwaki's <a href="https://www.shirokuriwaki.com/">website</a>,
-      Sascha Riaz's <a href="https://saschariaz.com/">website</a>, and
-      Hanno Hilbig's <a href="https://www.hannohilbig.com/">website</a>.
-    </small></p>
+    <section class="sec" id="papers">
+      <h2>Working papers</h2>
+      <div class="papers">
+        <div>
+          <h3>Under review</h3>
+          <ul class="plist">
+            <li>
+              <span class="pt">Office-Congruent, Not Gender-Congruent: Candidate Evaluation Across Senior Political Offices in Gender-Equal Societies</span>
+              <span class="pa">With Francesca Feo, Ragnhild Muriaas and Toril Stavenes</span>
+              <span class="flag">Revise and resubmit, West European Politics</span>
+            </li>
+            <li>
+              <span class="pt">The Right Influencer for the Right Guy: Ideological Congruence and Gender Equality Persuasion</span>
+              <span class="pa">With Hanna Bäck and Emma Renström</span>
+            </li>
+            <li>
+              <span class="pt">Gender Salience and Sexist Attitudes</span>
+              <span class="pa">With Francesca Feo</span>
+            </li>
+            <li>
+              <span class="pt">Small Men: The Impact of Perceived Masculine Threat on Sexist Attitudes and Far-Right Support</span>
+              <span class="pa">With Stuart J. Turnbull-Dugarte, Emma Renström, Hanna Bäck and Michal Grahn</span>
+            </li>
+            <li>
+              <span class="pt">Autocratic Booms and Democratic Echoes: State Repression and Democratic Aspirations in Hybrid Regimes</span>
+              <span class="pa">With Jovana Zafirović and Andrej Cvetić</span>
+            </li>
+            <li>
+              <span class="pt">Beating the Heat from the Street: Disruption, Policing and Public Response to Climate Protests</span>
+              <span class="pa">With Asli Unan and Heike Klüver</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>In progress</h3>
+          <ul class="plist">
+            <li>
+              <span class="pt">Impostors in the Office: Perceptions of Confidence Among Politicians in Norway</span>
+              <span class="pa">With Francesca Feo, Ragnhild Muriaas and Alba Huidobro</span>
+            </li>
+            <li>
+              <span class="pt">Buffer Zones and Support for Protest Rights: Evidence from Six European Countries</span>
+              <span class="pa">With Elisabeth Ivarsflaten and Ragnhild Muriaas</span>
+            </li>
+            <li>
+              <span class="pt">Gendered Effects of Economic Insecurity on Support for the Far-Right</span>
+              <span class="pa">With Philipp Heyna and Gaetano Inglese</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-  </section>
-</div>
+    <section class="sec" id="talks">
+      <h2>Invited talks</h2>
+      <ul class="plain">
+        <li><span class="when">2026, Universitat Pompeu Fabra, Barcelona</span>Institutions and Political Actors Seminar Series. <i>Buffer Zones and Support for Protest Rights</i></li>
+        <li><span class="when">2026, Humboldt-Universität zu Berlin</span>The Humboldt Governance Lab. <i>Impostors in the Office</i></li>
+      </ul>
+    </section>
+
+    <section class="sec" id="teaching">
+      <h2>Teaching</h2>
+      <div class="two">
+        <div>
+          <h3>Humboldt-Universität zu Berlin</h3>
+          <ul class="plain">
+            <li><span class="when">Lecturer, Summer 2025</span>Experiments in Political Science (master's). <a href="https://www.dropbox.com/scl/fi/xn4qllrl0ozr61kdccndm/Syllabus_Experiments.pdf?rlkey=81q3c6t3n4mdgtyw7kckvi8qw&amp;st=mz7r5300&amp;dl=0" target="_blank" rel="noopener">Syllabus</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Trinity College Dublin</h3>
+          <ul class="plain">
+            <li><span class="when">Teaching assistant, Spring and Fall 2022</span>Political Participation (POU33122)</li>
+            <li><span class="when">Teaching assistant, Fall 2021</span>Public Opinion (POU33111)</li>
+            <li><span class="when">Teaching assistant, 2019–21 and 2022–23</span>Politics and Irish Society (POU11021)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="contact">
+    <div class="foot">
+      <p class="say">Questions, collaborations or a survey experiment you want to run? Write to me.</p>
+      <a class="mail" href="mailto:dorde.milosav@uib.no">dorde.milosav@uib.no</a>
+      <div class="foot-row">
+        <span>Department of Government, University of Bergen, Christies gate 17, 5007 Bergen</span>
+        <span>Inspired by the sites of <a href="https://www.shirokuriwaki.com/">Shiro Kuriwaki</a>, <a href="https://saschariaz.com/">Sascha Riaz</a> and <a href="https://www.hannohilbig.com/">Hanno Hilbig</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var audio = document.querySelector('[data-audio]');
+      var hear = document.querySelector('[data-hear]');
+      var label = document.querySelector('[data-hear-label]');
+      if (audio && hear) {
+        hear.addEventListener('click', function () {
+          if (audio.paused) { audio.currentTime = 0; audio.play().catch(function () {}); }
+          else { audio.pause(); }
+        });
+        audio.addEventListener('play', function () { label.textContent = 'Playing…'; });
+        audio.addEventListener('ended', function () { label.textContent = 'How do I say that? Hear my name'; });
+        audio.addEventListener('pause', function () { label.textContent = 'How do I say that? Hear my name'; });
+        audio.addEventListener('error', function () { hear.hidden = true; });
+      }
+    })();
+  </script>
 </body>
 </html>
